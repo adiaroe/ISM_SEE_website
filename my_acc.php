@@ -185,7 +185,7 @@ include ("user_fb_login.php");
                       </tr>
                       <tr>
                         <td>Email</td>
-                        <td><a><?php if(isset($email))echo $email; else echo "Please Edit This Feild."?></a></td>
+                        <td><?php if(isset($email))echo $email; else echo "Please Edit This Feild."?></td>
                       </tr>
                         <td>Phone Number</td>
                         <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)

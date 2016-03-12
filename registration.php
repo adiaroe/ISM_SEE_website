@@ -150,8 +150,8 @@ mysqli_close($conn);
   </nav>
 </div>
 
-<form action="my_acc.php" class="register">
-            <h1>Registration</h1>
+<form action="<?php $_SERVER['PHP_SELF']?>" method = "post" class="register">
+            <h1>Edit You Details:</h1>
             <fieldset class="row1">
                 <legend>Personal Details
                 </legend>
@@ -341,7 +341,7 @@ mysqli_close($conn);
                 </p>
                 
             </fieldset>
-            <div><button class="button">Register &raquo;</button></div>
+            <div><button class="button">Save Details &raquo;</button></div>
         </form>
 
 
