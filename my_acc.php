@@ -93,7 +93,7 @@ include ("user_fb_login.php");
         </li>
         
         <!--<li class="menu_item secondary" id="menu_login">-->
-        <?php if(!$fbuser): ?>
+        <?php if(!$fbuser && !logged_in()): ?>
         <li class="menu_item">
           <a href="#" >Login<i class="fa fa-angle-down"></i></a>
           
@@ -103,19 +103,19 @@ include ("user_fb_login.php");
             echo $output;
             ?>
             
-            <a href="#" >Login Via LinkedIn</a>
+            <a href="login.php" >Login/Signup</a>
                          
           </div>
           
         </li>
         <?php endif; ?> 
-        <?php if($fbuser) :?>
+        <?php if($fbuser || logged_in() ) :?>
           <li class="menu_item">
           <a href="#" ><?php echo $fname." ".$lname; ?><i class="fa fa-angle-down"></i></a>
           
           <div class="submenu">
             
-            <a href="#" >My Account</a>
+            <a href="my_acc.php" >My Account</a>
             <a href="logout.php?logout" >Logout</a>
                          
           </div>

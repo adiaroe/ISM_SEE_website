@@ -107,7 +107,7 @@ include ("user_fb_login.php");
         <?php endif; ?> 
         <?php if($fbuser || logged_in() ) :?>
           <li class="menu_item">
-          <a href="#" ><?php echo $fname." ".$lname; ?><i class="fa fa-angle-down"></i></a>
+          <a href="#" ><?php echo $fullname; ?><i class="fa fa-angle-down"></i></a>
           
           <div class="submenu">
             

@@ -36,20 +36,26 @@ if($res = mysqli_query($conn,"SELECT unique_id FROM users_final")){
       }else{
         $found = 0;
       }
+      $flag = $flag + $found;
     }
-    if ($found == 0){
+    
+    if ($flag == 0){
       mysqli_query($conn,"INSERT INTO users_final (unique_id, fname, lname, email, gender, image) values ('$fb_id', '$fb_fname', '$fb_lname', '$fb_email', '$fb_gender', '$fb_image');");
     }
   }
+  
+
 $res1 = mysqli_query($conn,"SELECT * FROM users_final where unique_id = $fb_id");
   $row = mysqli_fetch_assoc($res1);
   $unique_id = $row['unique_id'];
   $fname = $row['fname'];
   $lname = $row['lname'];
+  $fullname = $row['fname']." ".$row['lname'];
   $email = $row['email'];
   $gender = $row['gender'];
   $image = $row['image'];
-  $fullname = $row['fname']." ".$row['lname'];
+  $phn = $row['phn'];
+  
 }
 if (logged_in()) {
   $email = $_SESSION['user_email'];
@@ -58,9 +64,12 @@ if (logged_in()) {
     $row = mysqli_fetch_assoc($res);
     $fname = $row['fname'];
     $lname = $row['lname'];
+    $fullname = $row['fname']." ".$row['lname'];
     $gender = $row['gender'];
     $image = $row['image'];
-    $fullname = $row['fname']." ".$row['lname'];
+    $phn = $row['phn'];
+    $skype = $row['skype'];
+    $unique_id = $row['unique_id'];
   }
 
 }

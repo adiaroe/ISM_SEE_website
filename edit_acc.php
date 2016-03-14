@@ -6,13 +6,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $fname = $_POST['fname_sub'];mysqli_query($conn, "UPDATE users_final SET fname = '$fname' WHERE unique_id = '$unique_id';");
     $lname = $_POST['lname_sub'];mysqli_query($conn, "UPDATE users_final SET lname = '$lname' WHERE unique_id = '$unique_id';"); 
     $email = $_POST['email_sub'];mysqli_query($conn, "UPDATE users_final SET email = '$email' WHERE unique_id = '$unique_id';");
+    $gender = $_POST['gender_sub'];mysqli_query($conn, "UPDATE users_final SET gender = '$gender' WHERE unique_id = '$unique_id';");
+    $phn = $_POST['phn_sub'];mysqli_query($conn, "UPDATE users_final SET phn = '$phn' WHERE unique_id = '$unique_id';");
+    $skype = $_POST['skype_sub'];mysqli_query($conn, "UPDATE users_final SET skype = '$skype' WHERE unique_id = '$unique_id';");
     //mysqli_query($conn, "UPDATE users_final SET fname = '$fname', lname = '$lname', email = '$email' WHERE unique_id = '$unique_id';");
     header("Location:my_acc.php");
   }
   if (logged_in()) {
     $fname = $_POST['fname_sub'];mysqli_query($conn, "UPDATE login_data SET fname = '$fname' WHERE unique_id = '$unique_id';");
-    $lname = $_POST['lname_sub'];mysqli_query($conn, "UPDATE users_final SET lname = '$lname' WHERE unique_id = '$unique_id';"); 
-    $email = $_POST['email_sub'];mysqli_query($conn, "UPDATE users_final SET email = '$email' WHERE unique_id = '$unique_id';");
+    $lname = $_POST['lname_sub'];mysqli_query($conn, "UPDATE login_data SET lname = '$lname' WHERE unique_id = '$unique_id';"); 
+    $email = $_POST['email_sub'];mysqli_query($conn, "UPDATE login_data SET email = '$email' WHERE unique_id = '$unique_id';");
+    $gender = $_POST['gender_sub'];mysqli_query($conn, "UPDATE login_data SET gender = '$gender' WHERE unique_id = '$unique_id';");
+    $phn = $_POST['phn_sub'];mysqli_query($conn, "UPDATE login_data SET phn = '$phn' WHERE unique_id = '$unique_id';");
+    $skype = $_POST['skype_sub'];mysqli_query($conn, "UPDATE login_data SET skype = '$skype' WHERE unique_id = '$unique_id';");
     //mysqli_query($conn, "UPDATE users_final SET fname = '$fname', lname = '$lname', email = '$email' WHERE unique_id = '$unique_id';");
     header("Location:my_acc.php");
   }
@@ -23,140 +29,14 @@ mysqli_close($conn);
 <html>
 <head>
 <?php include ("includes/essential.php"); ?>
-<LINK rel="stylesheet" type="text/css" href="static/css/bootstrap.css"></LINK>
-<LINK rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css"></LINK>
-<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+<link href='static/css/default.css' rel='stylesheet' type='text/css' >
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="javascript.js"></script>
 <script>
     function redirect(){
        window.location.href = "my_acc.php" ;
     }
 </script>
-<script>
-function emailcheck(){
-    var string1=document.info_submit.email_sub.value
-    if (string1.indexOf("@")==-1){
-        alert("Please input a valid email address!")
-        document.info_submit.email_sub.focus()
-    }
-}
-function alertIt(){
-   alert("redirect");
-}
-</script> 
-<style type="text/css">
-body{
-  background: url(noise.jpg) repeat;
-}
-.whole{
-   border-margin: 5px;
-   text-align: justify;
-   padding-top: 20px;
-   padding-bottom: 20px;  
-}
-.form-style-5{
-    max-width: 50%;
-    padding: 10px 20px;
-    background: #f4f7f8;
-    margin: 10px auto;
-    padding: 20px;
-    background: #f4f7f8;
-    border-radius: 25px;
-    font-family: Georgia, "Times New Roman", Times, serif;
-}
-.form-style-5 fieldset{
-    border: none;
-}
-.form-style-5 legend {
-    font-size: 1.4em;
-    margin-bottom: 10px;
-}
-.form-style-5 label {
-    display: block;
-    margin-bottom: 8px;
-}
-.form-style-5 input[type="text"],
-.form-style-5 input[type="date"],
-.form-style-5 input[type="datetime"],
-.form-style-5 input[type="email"],
-.form-style-5 input[type="number"],
-.form-style-5 input[type="search"],
-.form-style-5 input[type="time"],
-.form-style-5 input[type="url"],
-.form-style-5 textarea,
-.form-style-5 select {
-    font-family: Georgia, "Times New Roman", Times, serif;
-    background: rgba(255,255,255,.1);
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    margin: 0;
-    outline: 0;
-    padding: 7px;
-    width: 25%;
-    box-sizing: border-box; 
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; 
-    background-color: #e8eeef;
-    color:#8a97a0;
-    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-    margin-bottom: 30px;
-    
-}
-.form-style-5 input[type="text"]:focus,
-.form-style-5 input[type="date"]:focus,
-.form-style-5 input[type="datetime"]:focus,
-.form-style-5 input[type="email"]:focus,
-.form-style-5 input[type="number"]:focus,
-.form-style-5 input[type="search"]:focus,
-.form-style-5 input[type="time"]:focus,
-.form-style-5 input[type="url"]:focus,
-.form-style-5 textarea:focus,
-.form-style-5 select:focus{
-    background: #d2d9dd;
-}
-.form-style-5 select{
-    -webkit-appearance: menulist-button;
-    height:35px;
-}
-.form-style-5 .number {
-    background: #1abc9c;
-    color: #fff;
-    height: 30px;
-    width: 30px;
-    display: inline-block;
-    font-size: 0.8em;
-    margin-right: 4px;
-    line-height: 30px;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-    border-radius: 15px 15px 15px 0px;
-}
-
-.form-style-5 input[type="submit"],
-.form-style-5 input[type="button"]
-{
-    position: relative;
-    display: block;
-    padding: 19px 39px 18px 39px;
-    color: #FFF;
-    margin: 0 auto;
-    background: #1abc9c;
-    font-size: 18px;
-    text-align: justify;
-    font-style: normal;
-    width: 35%;
-    border: 1px solid #16a085;
-    border-width: 1px 1px 3px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-}
-.form-style-5 input[type="submit"]:hover,
-.form-style-5 input[type="button"]:hover
-{
-    background: #109177;
-}
-</style>
 </head>
 <body>
 <div id="menu">
@@ -241,7 +121,7 @@ body{
         </li>
         
         <!--<li class="menu_item secondary" id="menu_login">-->
-        <?php if(!$fbuser): ?>
+        <?php if(!$fbuser && !logged_in()): ?>
         <li class="menu_item">
           <a href="#" >Login<i class="fa fa-angle-down"></i></a>
           
@@ -251,15 +131,15 @@ body{
             echo $output;
             ?>
             
-            <a href="#" >Login Via LinkedIn</a>
+            <a href="login.php" >Login/Signup</a>
                          
           </div>
           
         </li>
         <?php endif; ?> 
-        <?php if($fbuser) :?>
+        <?php if($fbuser || logged_in() ) :?>
           <li class="menu_item">
-          <a href="#" ><?php echo $fullname; ?><i class="fa fa-angle-down"></i></a>
+          <a href="#" ><?php echo $fname." ".$lname; ?><i class="fa fa-angle-down"></i></a>
           
           <div class="submenu">
             
@@ -275,39 +155,266 @@ body{
     </section>
   </nav>
 </div>
-<div class="whole"><div class="form-style-5">
-<form name="info_submit" action="<?php $_SERVER['PHP_SELF']?>" method="post">
-<fieldset>
-<legend><span class="number">1</span> Personal Information</legend>
-<label for="job">Name:</label><br><input type="text" name="fname_sub" value="<?php if(isset($fname)) echo $fname; else echo "First Name"; ?>"> <input type="text" name="lname_sub" value="<?php if(isset($lname)) echo $lname; else echo " Last Name"; ?>"><br>
-<label for="job">Email Id:</label><br><input type="email" name="email_sub" value="<?php if(isset($email)) echo $email; else echo "Email Id"; ?>" onblur="emailcheck()"><br>
-<label for="job">Interests:</label><br>
-<select id="job" name="field4">
-<optgroup label="Indoors">
-  <option value="fishkeeping">Fishkeeping</option>
-  <option value="reading">Reading</option>
-  <option value="boxing">Boxing</option>
-  <option value="debate">Debate</option>
-  <option value="gaming">Gaming</option>
-  <option value="snooker">Snooker</option>
-  <option value="other_indoor">Other</option>
-</optgroup>
-<optgroup label="Outdoors">
-  <option value="football">Football</option>
-  <option value="swimming">Swimming</option>
-  <option value="fishing">Fishing</option>
-  <option value="climbing">Climbing</option>
-  <option value="cycling">Cycling</option>
-  <option value="other_outdoor">Other</option>
-</optgroup>
-</select>
-</fieldset>
-<fieldset>
-<legend><span class="number">2</span> Additional Info</legend> <br>
-<textarea name="field3" placeholder="About Your School"></textarea><br>
-</fieldset>
-<input type="submit" value="Submit Changes" />
-</form>
-</div></div>
+<form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" class="register">
+            <h1>Edit You Details:</h1>
+            <fieldset class="row1">
+                <legend>Personal Details
+                </legend>
+                <p>
+                    <label>First Name *
+                    </label>
+                    <input type="text" name="fname_sub" value="<?php if(isset($fname)) echo $fname;?>" required="<?php if(!isset($fname)) echo "true";?>"/>
+                    <label>Last Name *
+                    </label>
+                    <input type="text" name="lname_sub" value="<?php if(isset($lname)) echo $lname;?>" required="<?php if(!isset($lname)) echo "true";?>"/>
+                    <label>Email *
+                    </label>
+                    <input type="email" name="email_sub" value="<?php if(isset($email)) echo $email;?>" required="<?php if(!isset($email)) echo "true";?>" />
+                </p>
+                <p>
+                    <label>Gender *</label>
+                    <input name="gender_sub" type="radio" value="male" <?php if($gender == 'male') echo 'checked';?>/>
+                    <label class="gender">Male</label>
+                    <input name="gender_sub" type="radio" value="female" <?php if($gender == 'female') echo 'checked';?>/>
+                    <label class="gender">Female</label>
+                </p>
+                <p>
+                    <label>Phone No.
+                    </label>
+                    <input type="text" name="phn_sub" value="<?php if (isset($phn)) echo $phn;?>" />
+                    <label>Skype ID
+                    </label>
+                    <input type="text" name="skype_sub" value="<?php if(isset($skype)) echo $skype;?>" />
+                    <label class="obinfo">* obligatory fields
+                    </label>
+                </p>
+            </fieldset>
+            <fieldset class="row2">
+                <legend>Education  @ ISM
+                </legend>
+                <p>
+                    <label>Branch *
+                    </label>
+                    <select name="branch_sub" value="" ?>">
+                        <option>
+                        </option>
+                        <option value="ECE">ECE
+                        </option>
+                        <option value="EI">EI
+                        </option>
+                        
+                    </select>
+                </p>
+                <p>
+                    <label>Batch *
+                    </label>
+                    <select>
+                        <option>
+                        </option>
+                        <option value="2015">2015
+                        </option>
+                        <option value="2014">2014
+                        </option>
+                        <option value="2013">2013
+                        </option>
+                        <option value="2012">2012
+                        </option>
+                    </select>
+                </p>
+                
+                
+            </fieldset>
+
+      <br>
+      <fieldset class="row5">
+
+       <legend>Further Education
+                </legend>
+         <label> Higher Education</label>       
+         <input name="higher"type="radio" id="yes"  onclick="javascript:check();"value="radio"/>
+         <label class="gender">Yes</label>
+        <input name="higher" type="radio" id="no"  onclick="javascript:check();"value="radio"/>
+        <label class="gender">No</label>
+       
+        <div id="education" style="display: none;">
+        <label>COURSE</label>
+              <select >
+                        
+                        <option value=""  onclick="javascript:details();">SELECT 
+                        </option>
+                        <option value="mtech" id="mtech">M.tech
+                        </option>
+                        <option value="2" id="mba">MBA
+                        </option>
+                        <option value="3" id="ms">MS
+                        </option>
+                        <option value="4" id="phd">Phd
+                        </option>
+                        <option value="5" id="other">Other
+                        </option>
+            </select>
+
+      
+      
+      <label>University</label>
+     <input type="text" >
+     <label> Location</label>
+     <input type="text" >
+      <label>Specialization</label>
+     <input type="text" >
+     </div>
+       
+   </fieldset>
+
+    <fieldset class="row6">
+        
+<legend>Employement Details</legend>
+
+
+    <h3>Job Description</h3>
+            <select >
+                        
+                        <option value="">SELECT 
+                        </option>
+                        <option value="mtech" id="mtech">Core
+                        </option>
+                        <option value="2" id="mba">IT
+                        </option>
+                        <option value="3" id="ms">PSU
+                        </option>
+                        <option value="4" id="phd">Management
+                        </option>
+                        <option value="5" id="other">Start up
+                        </option>
+            </select>
+   <label>Organisation</label>
+  <input type="text">
+  <label>Position</label>
+  <input type="text">
+  </fieldset>
+
+
+               <div id="remote_int">
+                <p class="remote_q">
+                    <label class="interest">Interested in Remote Mentorship ? *</label>
+                    <label>Yes</label>
+                    <input type="radio" name="dep" id="rd1"  value="R and D">
+                    <label>No</label>
+                    <input type="radio" name="dep" id="web1" value="Web">
+                </p>
+                <div class="dropdown">
+              <span>What is Remote Mentorship ?</span>
+       <div class="dropdown-content">
+          <p>It is an initiative taken by the Department of Electronics, ISM , in which the alumni members can provide mentorship for the students of the department. The alumni will be allowed student with in background of electronics subject/ Coding/ Management Skills or any other field according  to the sustainability of alumni. Currently being in an employed community you might have tasks related to the above mentioned fields. These tasks and any other real world application project can be assigned to students, thereby helping students to gain real working experience and you can get your task done. The communication can be made through either email,phone,skype etc. This provides an interactive platform between alumni and the department. Hope you take part in this. </p>
+     </div>
+             </div>
+             </div>
+            <fieldset class="row3">
+                
+                
+                <div class="infobox"><h4>Disclaimer</h4>
+                    <p>The information taken from users will not be shared with any third party.</p>
+                </div>
+             
+
+            </fieldset>
+            <fieldset class="row4">
+                <legend>Terms and Mailing
+                </legend>
+                <p class="agreement">
+                    <input type="checkbox" value=""/>
+                    <label>*  I accept the <a href="#">Terms and Conditions</a></label>
+                </p>
+                <p class="agreement">
+                    <input type="checkbox" value=""/>
+                    <label>I want to receive mails & newsletter from Department of Electronics.</label>
+                </p>
+                
+            </fieldset>
+            <div><button class="button">Save Details &raquo;</button></div>
+        </form>
+
+
+
+
+
+
+<div id="footer">
+  <div class="row" id="footer_left">
+  
+    <div class="column large-3 small-12">
+      <div class="footer_section">
+        <a class="footer_section_header" href="search.html" >Browse</a>
+        
+        <a href="#" >By Search</a>
+        
+        <a href="#" >By Map</a>
+        
+        <a href="#" >By Resources</a>
+        
+      </div>
+    </div>
+  
+    <div class="column large-3 small-12">
+      <div class="footer_section">
+        <a class="footer_section_header" href="#" >About</a>
+        
+        <a href="https://www.ismaa.in" target="_blank" >ISM Alumni Association</a>
+        
+        <a href="#" >Alumni Meet Pictures(2015)  </a>
+        
+      </div>
+    </div>
+  
+    <div class="column large-3 small-12">
+      <div class="footer_section">
+        <a class="footer_section_header" href="#">Events</a>
+        
+        <a href="#">Basant &#39;2K16</a>
+        
+        <a href="#">Srijan - Cultral Fest of ISM</a>
+        
+        <a href="#">SEE Meet</a>
+        
+        <a href="#">All Events</a>
+      </div>
+    </div>
+    <div class="column large-3 small-12">
+      <div class="footer_section" id="footer_contact">
+            <a href="index.html#" class="footer_section_header">Contact</a>
+            <ul class="vertical">
+              <li><a href="mailto:ei@ismdhanbad.ac.in">ei@ismdhanbad.ac.in</a></li>
+              <li><a href="tel:+91-3262296622">+91-326-229-6622</a></li>
+            </ul>
+      </div>
+      <div id="footer_social_media">
+        
+        
+        
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="footer_bottom">
+  <div class="row">
+    <div class="column large-6 small-12" id="footer_bottom_college">
+      <img src="media/images/ism_logo.png" class="desaturate">
+      <span id="footer_bottom_college_name">Indian School of Mines</span>
+      
+      <span>&#169; copyright 2016</span>
+    </div>
+    <div class="column large-6 small-12" id="powered-by-ism">
+      <a href="http://www.ismdhanbad.ac.in/electronics-engineering/index.html" target="_blank">Department of Electronics</a>
+      
+    </div>
+  </div>
+</div>
+<div id="unsupported_browser">
 </body>
 </html>
