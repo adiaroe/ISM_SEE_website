@@ -1,5 +1,6 @@
 <?php
 include ("user_fb_login.php");
+if($fbuser || logged_in()){
 ?>
 <html>
 
@@ -217,4 +218,10 @@ include ("user_fb_login.php");
 <script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 </html>
+<?php
+}else{
+  echo "<script>alert('Please LogIn to access this page.');</script>";
+  header("Location:index.php");
+}
+?>
 

@@ -1,17 +1,48 @@
 <?php
 include ("user_fb_login.php");
+
 include 'config_db.php';
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  if($fbuser){
+   if($fbuser){
     $fname = $_POST['fname_sub'];mysqli_query($conn, "UPDATE users_final SET fname = '$fname' WHERE unique_id = '$unique_id';");
     $lname = $_POST['lname_sub'];mysqli_query($conn, "UPDATE users_final SET lname = '$lname' WHERE unique_id = '$unique_id';"); 
     $email = $_POST['email_sub'];mysqli_query($conn, "UPDATE users_final SET email = '$email' WHERE unique_id = '$unique_id';");
     $gender = $_POST['gender_sub'];mysqli_query($conn, "UPDATE users_final SET gender = '$gender' WHERE unique_id = '$unique_id';");
     $phn = $_POST['phn_sub'];mysqli_query($conn, "UPDATE users_final SET phn = '$phn' WHERE unique_id = '$unique_id';");
     $skype = $_POST['skype_sub'];mysqli_query($conn, "UPDATE users_final SET skype = '$skype' WHERE unique_id = '$unique_id';");
-    //mysqli_query($conn, "UPDATE users_final SET fname = '$fname', lname = '$lname', email = '$email' WHERE unique_id = '$unique_id';");
-    header("Location:my_acc.php");
-  }
+    if (isset($_FILES['photo']['tmp_name'])){
+          $target_dir = "profilepic/";
+          $target_file = $target_dir . $unique_id.".jpg";
+          $uploadOk = 1;
+          $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+          $check = getimagesize($_FILES['photo']['tmp_name']);
+          if($check !== false){
+            $uploadOk = 1;
+          }else{
+            $uploadOk = 0;
+          }
+          if ($_FILES["photo"]["size"] > 100000) {
+            echo "<script>alert('Sorry, your uploaded file is too large. Must be less than 100 KB.');</script>";
+            $uploadOk = 0;
+          }
+          if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+            echo "<script>alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed.')</scritp>";
+            $uploadOk = 0;
+          }
+          if ($uploadOk == 0) {
+          //echo "Sorry, your file was not uploaded.";
+          // if everything is ok, try to upload file
+          }else {
+                if (move_uploaded_file($_FILES['photo']['tmp_name'], $target_file)){
+                  mysqli_query($conn, "UPDATE users_final SET image = '$target_file' WHERE unique_id = '$unique_id';");
+                  //echo "The file ". basename( $_FILES["photo"]["name"]). " has been uploaded.";
+                }else{
+                    echo "<script>alert('Sorry, there was an error uploading your file.')</scritp>";
+                }
+          }
+          }
+          //header("Location:my_acc.php");
+    }
   if (logged_in()) {
     $fname = $_POST['fname_sub'];mysqli_query($conn, "UPDATE login_data SET fname = '$fname' WHERE unique_id = '$unique_id';");
     $lname = $_POST['lname_sub'];mysqli_query($conn, "UPDATE login_data SET lname = '$lname' WHERE unique_id = '$unique_id';"); 
@@ -19,11 +50,42 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $gender = $_POST['gender_sub'];mysqli_query($conn, "UPDATE login_data SET gender = '$gender' WHERE unique_id = '$unique_id';");
     $phn = $_POST['phn_sub'];mysqli_query($conn, "UPDATE login_data SET phn = '$phn' WHERE unique_id = '$unique_id';");
     $skype = $_POST['skype_sub'];mysqli_query($conn, "UPDATE login_data SET skype = '$skype' WHERE unique_id = '$unique_id';");
-    //mysqli_query($conn, "UPDATE users_final SET fname = '$fname', lname = '$lname', email = '$email' WHERE unique_id = '$unique_id';");
-    header("Location:my_acc.php");
+    if (isset($_FILES['photo']['tmp_name'])){
+          $target_dir = "profilepic/";
+          $target_file = $target_dir . $unique_id.".jpg";
+          $uploadOk = 1;
+          $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+          $check = getimagesize($_FILES['photo']['tmp_name']);
+          if($check !== false){
+            $uploadOk = 1;
+          }else{
+            $uploadOk = 0;
+          }
+          if ($_FILES["photo"]["size"] > 100000) {
+            echo "<script>alert('Sorry, your uploaded file is too large. Must be less than 100 KB.')</script>";
+            $uploadOk = 0;
+          }
+          if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+          }
+          if ($uploadOk == 0) {
+          //echo "Sorry, your file was not uploaded.";
+          // if everything is ok, try to upload file
+          }else {
+                if (move_uploaded_file($_FILES['photo']['tmp_name'], $target_file)){
+                  mysqli_query($conn, "UPDATE login_data SET image = '$target_file' WHERE unique_id = '$unique_id';");
+                  //echo "The file ". basename( $_FILES["photo"]["name"]). " has been uploaded.";
+                }else{
+                    echo "<script>alert('Sorry, there was an error uploading your file.')</scritp>";
+                }
+          }
+          
+    //header("Location:my_acc.php");
   }
-}
+  }
 mysqli_close($conn);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -155,7 +217,7 @@ mysqli_close($conn);
     </section>
   </nav>
 </div>
-<form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" class="register">
+<form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" enctype="multipart/form-data" class="register">
             <h1>Edit You Details:</h1>
             <fieldset class="row1">
                 <legend>Personal Details
@@ -185,6 +247,9 @@ mysqli_close($conn);
                     <label>Skype ID
                     </label>
                     <input type="text" name="skype_sub" value="<?php if(isset($skype)) echo $skype;?>" />
+                    <p> 
+                      <input name="photo" type="file" />
+                    </p>
                     <label class="obinfo">* obligatory fields
                     </label>
                 </p>
@@ -310,6 +375,7 @@ mysqli_close($conn);
              </div>
              </div>
             <fieldset class="row3">
+
                 
                 
                 <div class="infobox"><h4>Disclaimer</h4>

@@ -134,7 +134,7 @@ $branch = $_GET['branch'];
 //echo $branch.'<br>';
 }
 if (isset($branch) || isset($batch)){
-$query = "SELECT * FROM users_final where branch = '$branch' and batch = '$batch' order by fname";
+$query = "SELECT fname, lname, gender, batch, branch, unique_id, image FROM users_final where branch = 'EI' and batch = '2017' union SELECT fname, lname, gender, batch, branch, unique_id,image FROM login_data where branch = 'EI' and batch = '2017' order by fname";
 if($res = mysqli_query($conn,$query)){
 		while($row = mysqli_fetch_assoc($res)){
 			$fname = $row['fname'];
@@ -170,7 +170,7 @@ if($res = mysqli_query($conn,$query)){
 
 
 
-$query = "SELECT * FROM users_final where (branch = '$branch' or batch = '$batch') and not (branch = '$branch' and batch = '$batch') order by fname";
+$query = "SELECT fname, lname, gender, batch, branch, unique_id FROM users_final where (branch = '$branch' or batch = '$batch') and not (branch = '$branch' and batch = '$batch') union SELECT fname, lname, gender, batch, branch, unique_id FROM login_data where (branch = '$branch' or batch = '$batch') and not (branch = '$branch' and batch = '$batch') order by fname";
 if($res = mysqli_query($conn,$query)){
 		while($row = mysqli_fetch_assoc($res)){
 			$fname = $row['fname'];
@@ -192,16 +192,15 @@ if($_GET['sub_search']){
 	if (isset($_GET['search'])) {
 	$search = $_GET['search'];
 	$search = strtolower($search);
-	$query = "SELECT * FROM users_final, login_data;";
+	$query = "SELECT fname,lname FROM users_final union SELECT fname,lname FROM login_data";
 	if($res = mysqli_query($conn,$query)){
 		while ($row = mysqli_fetch_assoc($res)) {
 			$fname = strtolower($row['fname']);
 			$lname = strtolower($row['lname']);
-			$project = strtolower($row['project']);
 			$id = $row['unique_id'];
-			$db_str = $fname." ".$lname." ".$project;
+			$db_str = $fname." ".$lname;
 			if ((strpos($db_str, $search))!== false) {
-				$query1 = "SELECT * FROM users_final where unique_id = '$id' order by fname";
+				$query1 = "SELECT fname, lname, gender, batch FROM users_final where unique_id = '$id' union SELECT fname, lname, gender, batch FROM login_data where unique_id = '$id' order by fname";
 				if($res1 = mysqli_query($conn,$query1)){
 				while($row = mysqli_fetch_assoc($res1)){
 					$fname = $row['fname'];
