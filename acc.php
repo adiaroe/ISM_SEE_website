@@ -126,13 +126,12 @@ include ("user_fb_login.php");
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
 	}else{die('<br><br>Error - No Search Demanded!');}
-	$query = "SELECT * FROM users_final WHERE unique_id = '$id';";
+	$query = "SELECT * FROM users_final WHERE unique_id = '$id' union SELECT * FROM login_data WHERE unique_id = '$id' ";
 	if($res = mysqli_query($conn,$query)){
 		while($row = mysqli_fetch_assoc($res)){
 			$fname = $row['fname'];
 			$lname = $row['lname'];
-			$project = $row['project'];
-			echo $fname.$lname.$project;
+			echo $fname.$lname;
 		}
 	}
 ?>

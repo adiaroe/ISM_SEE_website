@@ -163,37 +163,28 @@ if($fbuser || logged_in()){
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>Department:</td>
-                        <td>Programming</td>
+                        <td>Branch:</td>
+                        <td><?php if(isset($branch))echo $branch; else echo "Please Edit This Feild.";?></td>
                       </tr>
                       <tr>
-                        <td>Hire date:</td>
-                        <td>06/23/2013</td>
+                        <td>Pass-Out Batch:</td>
+                        <td><?php if(isset($batch))echo $batch; else echo "Please Edit This Feild.";?></td>
                       </tr>
                       <tr>
-                        <td>Date of Birth</td>
-                        <td>01/24/1988</td>
-                      </tr>
-                   
-                         <tr>
-                             <tr>
                         <td>Gender</td>
                         <td><?php if(isset($gender))echo $gender; else echo "Please Edit This Feild";?></td>
                       </tr>
-                        <tr>
-                        <td>Home Address</td>
-                        <td>Metro Manila,Philippines</td>
-                      </tr>
                       <tr>
                         <td>Email</td>
-                        <td><?php if(isset($email))echo $email; else echo "Please Edit This Feild."?></td>
+                        <td><?php if(isset($email))echo $email; else echo "Please Edit This Feild.";?></td>
                       </tr>
                         <td>Phone Number</td>
-                        <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
-                        </td>
-                           
+                        <td><?php if(isset($phn))echo $phn; else echo "Please Edit This Field.";?></td>                           
                       </tr>
-                     
+                      <tr>
+                        <td>Skype ID:</td>
+                        <td><?php if(isset($skype))echo $skype; else echo "Please Edit This Feild.";?></td>
+                      </tr>
                     </tbody>
                   </table>
                   

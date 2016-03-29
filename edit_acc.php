@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $gender = $_POST['gender_sub'];mysqli_query($conn, "UPDATE login_data SET gender = '$gender' WHERE unique_id = '$unique_id';");
     $phn = $_POST['phn_sub'];mysqli_query($conn, "UPDATE login_data SET phn = '$phn' WHERE unique_id = '$unique_id';");
     $skype = $_POST['skype_sub'];mysqli_query($conn, "UPDATE login_data SET skype = '$skype' WHERE unique_id = '$unique_id';");
-    if (isset($_FILES['photo']['tmp_name'])){
+    if ($_FILES['photo']['tmp_name']!=''){
           $target_dir = "profilepic/";
           $target_file = $target_dir . $unique_id.".jpg";
           $uploadOk = 1;

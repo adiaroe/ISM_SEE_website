@@ -11,11 +11,11 @@ include ("user_fb_login.php");
   <nav class="top-bar content_wrapper" data-topbar role="navigation">
     <ul class="title-area">
       <li class="name text-left">
-        <a href="index.html" style="background-image:url('media/images/ism_logo.png');"></a>
+        <a href="index.php" style="background-image:url('media/images/ism_logo.png');"></a>
       </li>
       <li id="menu_college_name"><a href="index.php">Indian School of Mines</a></li>
       <li class="toggle-topbar menu-icon">
-        <a href="index.html#"><span></span></a>
+        <a href="index.php"><span></span></a>
       </li>
     </ul>
     <section id="menu_main" class="top-bar-section">
@@ -189,36 +189,33 @@ if($res = mysqli_query($conn,$query)){
 }
 }
 if($_GET['sub_search']){
-	if (isset($_GET['search'])) {
-	$search = $_GET['search'];
-	$search = strtolower($search);
-	$query = "SELECT fname,lname FROM users_final union SELECT fname,lname FROM login_data";
-	if($res = mysqli_query($conn,$query)){
-		while ($row = mysqli_fetch_assoc($res)) {
-			$fname = strtolower($row['fname']);
-			$lname = strtolower($row['lname']);
-			$id = $row['unique_id'];
-			$db_str = $fname." ".$lname;
-			if ((strpos($db_str, $search))!== false) {
-				$query1 = "SELECT fname, lname, gender, batch FROM users_final where unique_id = '$id' union SELECT fname, lname, gender, batch FROM login_data where unique_id = '$id' order by fname";
-				if($res1 = mysqli_query($conn,$query1)){
-				while($row = mysqli_fetch_assoc($res1)){
-					$fname = $row['fname'];
-					$lname = $row['lname'];
-					$gender = $row['gender'];
-					$batch = $row['batch'];
-					$id = $row['unique_id'];
-					$str =  $fname.'<br>'.$lname.'<br>'.$gender.'<br>'.$batch.'<br>';
-					echo $str;
-					$ctr++;
-					?>
-				    <a href="acc.php?id=<?php echo $id;?>"><?php echo $fname.'<br>'?></a>
-		    <?php
-				}}
-			}
-		}
-		}	
-		}
+	$search = strtolower($_GET['search']);
+  $query = "SELECT fname,lname,unique_id FROM users_final union SELECT fname,lname,unique_id FROM login_data";
+  if($res = mysqli_query($conn,$query)){
+    while($row = mysqli_fetch_assoc($res)){
+      $fname = strtolower($row['fname']);
+      $lname = strtolower($row['lname']);
+      $id = $row['unique_id'];
+      $db_str = " ".$fname.$lname;
+      if(strpos($db_str, $search)!=''){
+        $query_p = "SELECT fname,lname,image,gender FROM users_final WHERE unique_id='$id' union SELECT fname,lname,image,gender FROM login_data WHERE unique_id='$id' order by fname";
+        if ($res_p = mysqli_query($conn,$query_p)) {
+          while ($row_p = mysqli_fetch_assoc($res_p)) {
+            $fname = $row_p['fname'];
+            $lname = $row_p['lname'];
+            $image = $row_p['image'];
+            $gender = $row_p['gender'];
+            $str = $fname.'<br>'.$lname.'<br>'.$gender.'<br>'.$image.'<br>';
+            echo $str;
+            $ctr++;
+            ?>
+            <a href="acc.php?id=<?php echo $id;?>"><?php echo $fname.'<br>'?></a>
+            <?php
+          }
+        }
+      }
+    }
+  }
 }
 if ($ctr != 0) {
 	echo "<br><br> No. of Results = ".$ctr;

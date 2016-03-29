@@ -55,6 +55,9 @@ $res1 = mysqli_query($conn,"SELECT * FROM users_final where unique_id = $fb_id")
   $gender = $row['gender'];
   $image = $row['image'];
   $phn = $row['phn'];
+  $skype = $row['skype'];
+  $branch = $row['branch'];
+  $batch = $row['batch']; 
   
 }
 if (logged_in()) {
@@ -70,6 +73,8 @@ if (logged_in()) {
     $phn = $row['phn'];
     $skype = $row['skype'];
     $unique_id = $row['unique_id'];
+    $branch = $row['branch'];
+    $batch = $row['batch']; 
   }
 
 }

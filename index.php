@@ -139,7 +139,7 @@ include ("user_fb_login.php");
           s8.1,18.1,18.1,18.1c4.7,0,8.9-1.8,12.1-4.7l13.9,13.9C50.7,51.9,51.1,51.5,51.6,51.2z M24.3,41.5c-9,0-16.3-7.3-16.3-16.3
           S15.3,8.8,24.3,8.8s16.3,7.3,16.3,16.3S33.3,41.5,24.3,41.5z"/>
         <line fill="#fff" x1="-22.3" y1="12.2" x2="-22.3" y2="12.2"/>
-        </svg><form method="get" action="search.php"><input type="text" name="search" placeholder="Search Alumi by name, class, location,employer, course, etc"><input type="hidden" value="1" name="sub_search" /></form>
+        </svg><form method="get" action="search.php"><input type="text" name="search" placeholder="Search Alumni by name, batch, branch, employer, course, etc"><input type="hidden" value="1" name="sub_search" /></form>
       </div>
     </div>
   </div>
